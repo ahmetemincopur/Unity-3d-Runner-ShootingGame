@@ -7,11 +7,13 @@ public class PlayerMovement : MonoBehaviour
 {
     public int score = 0;
     public float moveSpeed = 5f;
+    private float leftBoundary = -6.5f;  // Sol sýnýr
+    private float rightBoundary = 6.5f;  // Sað sýnýr
     public float laneChangeSpeed = 3f;
     public GameObject bulletPrefab; // Mermi prefabý
     public Transform firePoint; // Merminin çýkýþ noktasý
     public float fireRate = 0.5f; // Ateþ etme hýzý
-    private float nextFireTime = 0.5f;
+    private float nextFireTime = 0.2f;
     Rigidbody rb;
 
     private Vector3 moveDirection = Vector3.forward;
@@ -58,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
             // Horizontal movement based on direction
             Vector3 horizontalMove = new Vector3(direction, 0, 0) * laneChangeSpeed * Time.deltaTime;
             transform.Translate(horizontalMove, Space.World);
+            RestrictPlayerMovement();
         }
 
     }
@@ -72,7 +75,17 @@ public class PlayerMovement : MonoBehaviour
     {
         return Hp;
     }
+    private void RestrictPlayerMovement()
+    {
+        // Mevcut pozisyonu al
+        Vector3 currentPosition = transform.position;
 
+        // X pozisyonunu belirli sýnýrlar arasýnda tut
+        currentPosition.x = Mathf.Clamp(currentPosition.x, leftBoundary, rightBoundary);
+
+        // Sýnýrlandýrýlmýþ pozisyonu geri uygulayýn
+        transform.position = currentPosition;
+    }
     private void Start()
     {
         rb = GetComponent<Rigidbody>();

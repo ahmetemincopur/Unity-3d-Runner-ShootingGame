@@ -24,7 +24,6 @@ public class HealthBar : MonoBehaviour
     public void HealthBarProgress(float currentHealth,float maxHealth)
     {
         healthBarInstance=currentHealth/maxHealth;
-        Debug.Log("halloooo"+healthBarInstance);
         transform.gameObject.SetActive(true);
     }
 }

@@ -7,7 +7,7 @@ public class Zombie : MonoBehaviour
 {
     [SerializeField] float currentHealth;
     [SerializeField] HealthBar healthBarScript;
-    public float zombieHP = 500;
+    public float zombieHP = 100;
     bool zombieDead;
 
     Animator zombieAnimator;
@@ -93,7 +93,7 @@ public class Zombie : MonoBehaviour
     }
     public void takeDamageZombie()
     {
-        currentHealth -= Random.Range(5, 10);
+        currentHealth -= Random.Range(45, 55);
         healthBarScript.HealthBarProgress(currentHealth, zombieHP);
 
     }
